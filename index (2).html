@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVCOURSES - Cours de Développement</title>
+    <style>
+        /* Fond noir foncé global */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Noir foncé */
+            color: #00ff00; /* Vert principal pour le texte */
+            font-family: 'Courier New', monospace; /* Police style terminal pour un look tech */
+            min-height: 100vh;
+        }
+
+        /* Conteneur principal */
+        .App, main, #root {
+            background-color: #1a1a1a;
+            color: #00ff00;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1); /* Ombre verte subtile */
+        }
+
+        /* Titres et en-têtes en vert vif */
+        h1, h2, h3 {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00; /* Effet glow vert */
+            border-bottom: 1px solid #006400; /* Bordure verte foncée */
+            padding-bottom: 10px;
+        }
+
+        /* Liens en vert */
+        a {
+            color: #00ff00;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #006400; /* Vert plus foncé au survol */
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        /* Boutons avec style vert */
+        button, .btn {
+            background-color: #006400; /* Vert foncé */
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: inherit;
+            display: inline-block;
+            text-align: center;
+        }
+
+        button:hover, .btn:hover {
+            background-color: #00ff00;
+            color: #1a1a1a;
+            box-shadow: 0 0 10px #00ff00; /* Glow au survol */
+        }
+
+        /* Cartes ou sections */
+        .card, section {
+            background-color: #2a2a2a; /* Gris-noir pour contraste */
+            border: 1px solid #006400;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 255, 0, 0.1);
+        }
+
+        /* Styles pour About et Contact */
+        .about, .contact {
+            text-align: center;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background-color: #1a1a1a;
+            border: 1px solid #006400;
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #006400;
+        }
+
+        /* Message de succès/erreur */
+        .form-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-success {
+            background-color: #006400;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .form-error {
+            background-color: #8B0000;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+        }
+
+        /* Navigation – mise à jour pour centrer les liens et fixer le nom à gauche */
+        nav {
+            background-color: #1a1a1a;
+            border-bottom: 2px solid #00ff00;
+            padding: 10px;
+            position: relative; /* Pour positionner le nom absolument */
+            min-height: 50px; /* Hauteur minimale pour l'alignement vertical */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Centre les liens au milieu de la nav */
+            align-items: center;
+        }
+
+        nav li {
+            margin: 0 15px; /* Espace égal entre les liens pour un centrage parfait */
+        }
+
+        /* Style pour REDA EHBISSE – fixé à gauche, sans affecter le centrage */
+        .brand-name {
+            position: absolute;
+            left: 20px; /* À gauche de la nav */
+            top: 50%;
+            transform: translateY(-50%); /* Centré verticalement */
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 0; /* Pas de marge pour qu'il reste fixe */
+        }
+
+        nav a {
+            color: #00ff00;
+        }
+
+        /* Contenu principal */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #006400;
+            margin-top: 40px;
+            color: #006400;
+            background-color: #1a1a1a;
+        }
+
+        .slogan {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive – sur mobile, liens en colonne centrée, nom en haut à gauche */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            
+            nav {
+                padding: 10px 0;
+            }
+            
+            .brand-name {
+                position: static; /* Sur mobile, nom en haut à gauche, pas absolu */
+                left: auto;
+                top: auto;
+                transform: none;
+                margin-bottom: 10px;
+                text-align: left;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center; /* Liens centrés en colonne */
+                justify-content: center;
+            }
+
+            nav li {
+                margin: 5px 0;
+            }
+
+            .course-list { grid-template-columns: 1fr; }
+            .contact-form { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <!-- Liens centrés : Accueil est maintenant au milieu visuel -->
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#courses">Cours</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <!-- Nom fixé à gauche (hors ul pour ne pas perturber le centrage) -->
+        <li class="brand-name">REDA EHBISSE</li>
+    </nav>
+
+    <main>
+        <header>
+            <h1>DEVCOURSES</h1>
+            <p>Bienvenue sur la plateforme de cours de développement web et logiciel.</p>
+            <a href="https://discord.gg/uNSge8sP" target="_blank" class="btn">Commencer un cours</a>
+        </header>
+
+        <section id="courses" class="course-list">
+            <div class="card">
+                <h2>Introduction à JavaScript</h2>
+                <p>Apprenez les bases du langage JavaScript pour le web.</p>
+                <a href="https://discord.gg/uNSge8sP" target="_blank" class="btn">S'inscrire</a>
+            </div>
+            <div class="card">
+                <h2>React Avancé</h2>
+                <p>Découvrez les hooks et les composants avancés en React.</p>
+                <a href="https://discord.gg/uNSge8sP" target="_blank" class="btn">S'inscrire</a>
+            </div>
+            <div class="card">
+                <h2>Node.js et Express</h2>
+                <p>Créez des API backend avec Node.js.</p>
+                <a href="https://discord.gg/uNSge8sP" target="_blank" class="btn">S'inscrire</a>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <p class="slogan">YOUR FUTURE</p>
+            <h2>About Us</h2>
+            <p>DevCourses is the solution to develop your innovative spirit. We teach you programming independently through courses we manage. We focus on practical skills to boost your career. We are the programmers, We are the future.</p>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+            <p>Email: fidaizip@gmail.com | Rejoignez-nous sur <a href="https://discord.gg/uNSge8sP" target="_blank">DISCORD</a></p>
+            <form class="contact-form" action="https://formspree.io/f/xdkwlzev" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+                <div class="form-message" id="form-message"></div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 COURSES.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const form = document.querySelector('.contact-form');
+        const messageDiv = document.getElementById('form-message');
+
+        form.addEventListener('submit', function(e) {
+            const name = form.querySelector('input[name="name"]').value.trim();
+            const email = form.querySelector('input[name="email"]').value.trim();
+            const message = form.querySelector('textarea[name="message"]').value.trim();
+
+            if (!name || !email || !message) {
+                e.preventDefault();
+                messageDiv.textContent = 'Veuillez remplir tous les champs.';
+                messageDiv.className = 'form-message form-error';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            // Pas de preventDefault ici pour laisser Formspree soumettre
+            messageDiv.textContent = 'Message envoyé ! Vous recevrez une confirmation.';
+            messageDiv.className = 'form-message form-success';
+            messageDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
